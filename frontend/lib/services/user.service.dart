@@ -1,11 +1,11 @@
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:frontend/models/user.model.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert' as convert;
 
 class UserService {
-  static const String usersEndpoint = "http://192.168.100.12:3000/users";
-
   static Future<List<UserModel>> getUsers() async {
+    String usersEndpoint = dotenv.env["API_URL"]!;
     var response = await http.get(Uri.parse(usersEndpoint));
 
     List<dynamic> usersResponse =
@@ -28,6 +28,7 @@ class UserService {
   }
 
   static Future<UserModel> getUserById({required String id}) async {
+    String usersEndpoint = dotenv.env["API_URL"]!;
     var response = await http.get(Uri.parse("$usersEndpoint/$id"));
 
     Map<String, dynamic> userResponse =
@@ -44,11 +45,13 @@ class UserService {
   }
 
   static Future<void> deleteUser(String id) async {
+    String usersEndpoint = dotenv.env["API_URL"]!;
     http.delete(Uri.parse("$usersEndpoint/$id"));
   }
 
   static Future<UserModel> createUser(
       {required String firstname, required String lastname}) async {
+    String usersEndpoint = dotenv.env["API_URL"]!;
     var response = await http.post(
       Uri.parse(usersEndpoint),
       headers: {"Content-Type": "application/json"},
@@ -75,6 +78,7 @@ class UserService {
       {required String id,
       required String firstname,
       required String lastname}) async {
+    String usersEndpoint = dotenv.env["API_URL"]!;
     http.put(
       Uri.parse("$usersEndpoint/$id"),
       headers: {"Content-Type": "application/json"},

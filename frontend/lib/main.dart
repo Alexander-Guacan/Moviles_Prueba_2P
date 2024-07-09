@@ -17,9 +17,21 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
+      title: 'Mi aplicacion',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        appBarTheme: AppBarTheme(
+          backgroundColor: Colors.purple[100],
+          titleTextStyle: const TextStyle(
+            fontSize: 38,
+            fontFamily: 'Courgette',
+            color: Colors.black,
+          ),
+        ),
+
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.purple,
+
+        ),
+
         useMaterial3: true,
       ),
       initialRoute: "/",

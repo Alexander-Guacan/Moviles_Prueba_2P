@@ -16,8 +16,8 @@ class _UsersPageState extends State<UsersPage> {
   @override
   void initState() {
     super.initState();
-    
-    UserService.getUsers().then((usersFromDb) => setState(() {
+    UserService.getUsers().then((usersFromDb) =>
+        setState(() {
           users = usersFromDb;
         }));
   }
@@ -29,33 +29,75 @@ class _UsersPageState extends State<UsersPage> {
         title: const Text("Usuarios"),
         centerTitle: true,
       ),
-      body: ListView.builder(
-          itemCount: users.length,
-          itemBuilder: (context, index) {
-            return Row(
-              children: [
-                Expanded(
-                  child: ListTile(
-                    leading: Image.network(users[index].avatar),
-                    title: Text(
-                        "${users[index].firstname} ${users[index].lastname}"),
+      body: Stack(
+        children: [
+          Container(
+            color: Colors.teal[100],
+          ),
+          ListView.builder(
+            padding: const EdgeInsets.all(9),
+            itemCount: users.length,
+            itemBuilder: (context, index) {
+              return Card(
+                margin: const EdgeInsets.symmetric(vertical: 9),
+                elevation: 4,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(15),
+                ),
+                child: Container(
+                  decoration: BoxDecoration(
+                    gradient: const LinearGradient(
+                      colors: [Colors.blueAccent, Colors.tealAccent],
+                      begin: Alignment.topLeft,
+                      end: Alignment.bottomRight,
+                    ),
+                    borderRadius: BorderRadius.circular(15),
+                  ),
+                  padding: const EdgeInsets.all(16),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      ListTile(
+                        leading: CircleAvatar(
+                          backgroundImage: NetworkImage(users[index].avatar),
+                          radius: 30,
+                        ),
+                        title: Text(
+                          "${users[index].firstname} ${users[index].lastname}",
+                          style: const TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        trailing: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            IconButton(
+                              icon: const Icon(Icons.edit),
+                              onPressed: () =>
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) =>
+                                          EditUserPage(userId: users[index].id),
+                                    ),
+                                  ),
+                            ),
+                            IconButton(
+                              icon: const Icon(Icons.delete_forever),
+                              onPressed: () => _showAlert(context, index),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
                   ),
                 ),
-                IconButton(
-                  onPressed: () => _showAlert(context, index),
-                  icon: const Icon(Icons.delete_forever),
-                ),
-                IconButton(
-                  onPressed: () => Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) =>
-                              EditUserPage(userId: users[index].id))),
-                  icon: const Icon(Icons.edit),
-                ),
-              ],
-            );
-          }),
+              );
+            },
+          ),
+        ],
+      ),
     );
   }
 
@@ -64,31 +106,77 @@ class _UsersPageState extends State<UsersPage> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: const Text("Eliminar contacto"),
-          content: Text(
-              "¿Está seguro que desea eliminar a ${users[index].firstname} ${users[index].lastname}?"),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(15),
+          ),
+          title: Text(
+            "Eliminar contacto",
+            style: TextStyle(
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+              color: Colors.red[800],
+            ),
+          ),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text(
+                "¿Está seguro que desea eliminar a ${users[index]
+                    .firstname} ${users[index].lastname}?",
+                style: TextStyle(fontSize: 16),
+              ),
+              SizedBox(height: 20),
+              Row(
+                children: [
+                  CircleAvatar(
+                    backgroundImage: NetworkImage(users[index].avatar),
+                    radius: 30,
+                  ),
+                  SizedBox(width: 10),
+                  Text(
+                    "${users[index].firstname} ${users[index].lastname}",
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
+                  ),
+                ],
+              ),
+            ],
+          ),
           actions: [
             TextButton(
-              style: ButtonStyle(
-                backgroundColor: WidgetStatePropertyAll(Colors.red[800]),
+              style: TextButton.styleFrom(
+                backgroundColor: Colors.red[800],
+                padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10),
+                ),
               ),
               onPressed: () => _removeContact(context, index),
               child: const Text(
                 "Eliminar",
-                style: TextStyle(color: Colors.white),
+                style: TextStyle(color: Colors.white, fontSize: 16),
               ),
             ),
             TextButton(
+              style: TextButton.styleFrom(
+                padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10),
+                ),
+              ),
               onPressed: () {
                 Navigator.pop(context);
               },
-              child: const Text("Cancelar"),
-            )
+              child: const Text(
+                "Cancelar",
+                style: TextStyle(fontSize: 16),
+              ),
+            ),
           ],
         );
       },
     );
   }
+
 
   void _removeContact(BuildContext context, int index) async {
     await UserService.deleteUser(users[index].id);

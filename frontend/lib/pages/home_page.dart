@@ -15,19 +15,32 @@ class _HomePageState extends State<HomePage> {
         title: const Text("Menu"),
         centerTitle: true,
       ),
-      body: Center(
-        child: Column(
+      body: Container(
+        color: Colors.lightBlueAccent[100],
+        child: Center(
+          child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                padding: EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+                textStyle: TextStyle(fontSize: 20),
+
+              ),
               onPressed: () => Navigator.pushNamed(context, "/users"),
               child: const Text("Lista de usuarios"),
             ),
+            const SizedBox(height: 16),
             ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                padding: EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+                textStyle: TextStyle(fontSize: 20),
+              ),
               onPressed: () => Navigator.pushNamed(context, "/create_user"),
               child: const Text("Crear usuario"),
             ),
           ],
+          ),
         ),
       ),
     );

@@ -12,16 +12,16 @@ class EditUserPage extends StatefulWidget {
 
 class _EditUserPageState extends State<EditUserPage> {
   final TextEditingController firstnameController =
-      TextEditingController(text: "");
+  TextEditingController(text: "");
   final TextEditingController lastnameController =
-      TextEditingController(text: "");
+  TextEditingController(text: "");
   UserModel? user;
 
   @override
   void initState() {
     super.initState();
     UserService.getUserById(id: widget.userId).then(
-      (userFromDb) => setState(() {
+          (userFromDb) => setState(() {
         user = userFromDb;
         firstnameController.text = userFromDb.firstname;
         lastnameController.text = userFromDb.lastname;
@@ -36,23 +36,63 @@ class _EditUserPageState extends State<EditUserPage> {
         title: const Text("Editar Usuario"),
         centerTitle: true,
       ),
-      body: Center(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 24),
-          child: Column(
-            children: [
-              TextField(
-                controller: firstnameController,
-                decoration: const InputDecoration(label: Text("Nombre")),
-              ),
-              TextField(
-                controller: lastnameController,
-                decoration: const InputDecoration(label: Text("Apellido")),
-              ),
-              ElevatedButton(
+      body: Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            colors: [Colors.lightGreenAccent, Colors.blueAccent],
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+          ),
+        ),
+        child: Center(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                TextField(
+                  controller: firstnameController,
+                  decoration: InputDecoration(
+                    labelText: "Nombre",
+                    labelStyle: TextStyle(color: Colors.black, fontSize: 21),
+                    filled: true,
+                    fillColor: Colors.white70,
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 20),
+                TextField(
+                  controller: lastnameController,
+                  decoration: InputDecoration(
+                    labelText: "Apellido",
+                    labelStyle: TextStyle(color: Colors.black, fontSize: 21),
+                    filled: true,
+                    fillColor: Colors.white70,
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 20),
+                ElevatedButton(
                   onPressed: () => _showAlert(context),
-                  child: const Text("Guardar cambios"))
-            ],
+                  style: ElevatedButton.styleFrom(
+
+                    padding: EdgeInsets.symmetric(horizontal: 32, vertical: 12),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    elevation: 5,
+                  ),
+                  child: const Text(
+                    "Guardar cambios",
+                    style: TextStyle(fontSize: 18),
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),
@@ -76,8 +116,12 @@ class _EditUserPageState extends State<EditUserPage> {
               "¿Está seguro que desea cambiar la información de ${user?.firstname} ${user?.lastname}?"),
           actions: [
             TextButton(
-              style: ButtonStyle(
-                backgroundColor: WidgetStatePropertyAll(Colors.green[800]),
+              style: TextButton.styleFrom(
+                backgroundColor: Colors.green[600],
+                padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10),
+                ),
               ),
               onPressed: () {
                 _updateUser(context);
@@ -85,15 +129,17 @@ class _EditUserPageState extends State<EditUserPage> {
               },
               child: const Text(
                 "Guardar",
-                style: TextStyle(color: Colors.white),
+                style: TextStyle(color: Colors.white,fontSize: 18),
               ),
             ),
             TextButton(
               onPressed: () {
                 Navigator.pop(context);
               },
-              child: const Text("Cancelar"),
-            )
+              child: const Text("Cancelar",
+              style: TextStyle(fontSize: 18),
+              ),
+            ),
           ],
         );
       },

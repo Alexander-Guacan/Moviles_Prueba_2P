@@ -23,8 +23,8 @@ class _HomePageState extends State<HomePage> {
           children: [
             ElevatedButton(
               style: ElevatedButton.styleFrom(
-                padding: EdgeInsets.symmetric(horizontal: 24, vertical: 12),
-                textStyle: TextStyle(fontSize: 20),
+                padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+                textStyle: const TextStyle(fontSize: 20),
 
               ),
               onPressed: () => Navigator.pushNamed(context, "/users"),
@@ -33,8 +33,8 @@ class _HomePageState extends State<HomePage> {
             const SizedBox(height: 16),
             ElevatedButton(
               style: ElevatedButton.styleFrom(
-                padding: EdgeInsets.symmetric(horizontal: 24, vertical: 12),
-                textStyle: TextStyle(fontSize: 20),
+                padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+                textStyle: const TextStyle(fontSize: 20),
               ),
               onPressed: () => Navigator.pushNamed(context, "/create_user"),
               child: const Text("Crear usuario"),

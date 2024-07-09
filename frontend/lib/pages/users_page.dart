@@ -123,19 +123,19 @@ class _UsersPageState extends State<UsersPage> {
               Text(
                 "¿Está seguro que desea eliminar a ${users[index]
                     .firstname} ${users[index].lastname}?",
-                style: TextStyle(fontSize: 16),
+                style: const TextStyle(fontSize: 16),
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               Row(
                 children: [
                   CircleAvatar(
                     backgroundImage: NetworkImage(users[index].avatar),
                     radius: 30,
                   ),
-                  SizedBox(width: 10),
+                  const SizedBox(width: 10),
                   Text(
                     "${users[index].firstname} ${users[index].lastname}",
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
+                    style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
                   ),
                 ],
               ),
@@ -145,7 +145,7 @@ class _UsersPageState extends State<UsersPage> {
             TextButton(
               style: TextButton.styleFrom(
                 backgroundColor: Colors.red[800],
-                padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10),
                 ),
@@ -158,7 +158,7 @@ class _UsersPageState extends State<UsersPage> {
             ),
             TextButton(
               style: TextButton.styleFrom(
-                padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10),
                 ),

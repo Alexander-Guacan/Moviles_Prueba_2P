@@ -37,7 +37,7 @@ class _EditUserPageState extends State<EditUserPage> {
         centerTitle: true,
       ),
       body: Container(
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           gradient: LinearGradient(
             colors: [Colors.lightGreenAccent, Colors.blueAccent],
             begin: Alignment.topLeft,
@@ -54,7 +54,7 @@ class _EditUserPageState extends State<EditUserPage> {
                   controller: firstnameController,
                   decoration: InputDecoration(
                     labelText: "Nombre",
-                    labelStyle: TextStyle(color: Colors.black, fontSize: 21),
+                    labelStyle: const TextStyle(color: Colors.black, fontSize: 21),
                     filled: true,
                     fillColor: Colors.white70,
                     border: OutlineInputBorder(
@@ -67,7 +67,7 @@ class _EditUserPageState extends State<EditUserPage> {
                   controller: lastnameController,
                   decoration: InputDecoration(
                     labelText: "Apellido",
-                    labelStyle: TextStyle(color: Colors.black, fontSize: 21),
+                    labelStyle: const TextStyle(color: Colors.black, fontSize: 21),
                     filled: true,
                     fillColor: Colors.white70,
                     border: OutlineInputBorder(
@@ -80,7 +80,7 @@ class _EditUserPageState extends State<EditUserPage> {
                   onPressed: () => _showAlert(context),
                   style: ElevatedButton.styleFrom(
 
-                    padding: EdgeInsets.symmetric(horizontal: 32, vertical: 12),
+                    padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 12),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(12),
                     ),
@@ -118,7 +118,7 @@ class _EditUserPageState extends State<EditUserPage> {
             TextButton(
               style: TextButton.styleFrom(
                 backgroundColor: Colors.green[600],
-                padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10),
                 ),

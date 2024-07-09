@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:frontend/models/user.model.dart';
 import 'package:frontend/services/user.service.dart';
 
 class CreateUserPage extends StatefulWidget {
@@ -11,9 +10,9 @@ class CreateUserPage extends StatefulWidget {
 
 class _CreateUserPageState extends State<CreateUserPage> {
   final TextEditingController firstnameController =
-  TextEditingController(text: "");
+      TextEditingController(text: "");
   final TextEditingController lastnameController =
-  TextEditingController(text: "");
+      TextEditingController(text: "");
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +22,7 @@ class _CreateUserPageState extends State<CreateUserPage> {
         centerTitle: true,
       ),
       body: Container(
-       color: Colors.orange[200],
+        color: Colors.orange[200],
         child: Center(
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
@@ -34,7 +33,8 @@ class _CreateUserPageState extends State<CreateUserPage> {
                   controller: firstnameController,
                   decoration: InputDecoration(
                     labelText: "Nombre",
-                    labelStyle: const TextStyle(color: Colors.black, fontSize: 21),
+                    labelStyle:
+                        const TextStyle(color: Colors.black, fontSize: 21),
                     filled: true,
                     fillColor: Colors.white70,
                     border: OutlineInputBorder(
@@ -47,7 +47,8 @@ class _CreateUserPageState extends State<CreateUserPage> {
                   controller: lastnameController,
                   decoration: InputDecoration(
                     labelText: "Apellido",
-                    labelStyle: const TextStyle(color: Colors.black, fontSize: 21),
+                    labelStyle:
+                        const TextStyle(color: Colors.black, fontSize: 21),
                     filled: true,
                     fillColor: Colors.white70,
                     border: OutlineInputBorder(
@@ -59,7 +60,8 @@ class _CreateUserPageState extends State<CreateUserPage> {
                 ElevatedButton(
                   onPressed: () => _showAlert(context),
                   style: ElevatedButton.styleFrom(
-                    padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 12),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 32, vertical: 12),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(12),
                     ),
@@ -82,7 +84,6 @@ class _CreateUserPageState extends State<CreateUserPage> {
     String firstname = firstnameController.text;
     String lastname = lastnameController.text;
     await UserService.createUser(firstname: firstname, lastname: lastname);
-    Navigator.pop(context); // Volver a la página anterior después de crear el usuario
   }
 
   Future<void> _showAlert(BuildContext context) async {
@@ -91,13 +92,14 @@ class _CreateUserPageState extends State<CreateUserPage> {
       builder: (BuildContext context) {
         return AlertDialog(
           title: const Text("Crear Usuario"),
-          content: Text(
+          content: const Text(
               "¿Está seguro que desea crear un nuevo usuario con la información proporcionada?"),
           actions: [
             TextButton(
               style: TextButton.styleFrom(
                 backgroundColor: Colors.green[600],
-                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10),
                 ),
